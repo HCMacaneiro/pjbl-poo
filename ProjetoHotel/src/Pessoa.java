@@ -17,13 +17,18 @@ public abstract class Pessoa {
         return nome;
     }
 
-    public String toString() {
-        return
-            "\n\nNome: " + this.nome +
-            "\nCPF: " + this.cpf +
-            "\nData de Nascimento: " + this.dataNascimento +
-            "\nEndereço: " + this.endereco +
-            "\nTelefone: " + this.telefone;
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void mostrar() {
+        System.out.println(
+        "Nome: " + this.nome + "\n" +
+        "CPF: " + this.cpf + "\n" +
+        "Data de Nascimento: " + this.dataNascimento + "\n" +
+        "Endereço: " + this.endereco + "\n" +
+        "Telefone: " + this.telefone
+        );
     }
 
     

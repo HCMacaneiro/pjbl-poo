@@ -11,7 +11,8 @@ public class Funcionario extends Pessoa {
     }
 
     @Override
-    public String toString() {
-        return super.toString() + "\nSalario: " + this.salario;
+    public void mostrar() {
+        super.mostrar();
+        System.out.println("Salario: " + this.salario);
     }
 }

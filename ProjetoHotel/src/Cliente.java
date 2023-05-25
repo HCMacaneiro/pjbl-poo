@@ -11,7 +11,8 @@ public class Cliente extends Pessoa {
     }
 
     @Override
-    public String toString() {
-        return "Olá, sou um cliente, meu nome é " + getNome();
+    public void mostrar() {
+        super.mostrar();
+        System.out.println("Email: " + this.email);
     }
 }
