@@ -1,8 +1,8 @@
 public class Cliente extends Pessoa {
     private String email;
 
-    public Cliente(String nome, String cpf, String email) {
-        super(nome, cpf);
+    public Cliente(String nome, String cpf, String email, String endereco, String telefone, String dataNascimento) {
+        super(nome, cpf, endereco, telefone, dataNascimento);
         this.email = email;
     }
 
@@ -11,7 +11,7 @@ public class Cliente extends Pessoa {
     }
 
     @Override
-    public void apresentacao() {
-        System.out.println("Olá, sou um cliente, meu nome é " + getNome());
+    public String toString() {
+        return "Olá, sou um cliente, meu nome é " + getNome();
     }
 }
