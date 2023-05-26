@@ -13,6 +13,8 @@ public abstract class Pessoa {
         this.telefone = telefone;
     }
 
+    public abstract void status();
+
     public String getNome() {
         return nome;
     }
@@ -23,13 +25,12 @@ public abstract class Pessoa {
 
     public void mostrar() {
         System.out.println(
-        "Nome: " + this.nome + "\n" +
-        "CPF: " + this.cpf + "\n" +
-        "Data de Nascimento: " + this.dataNascimento + "\n" +
-        "Endereço: " + this.endereco + "\n" +
-        "Telefone: " + this.telefone
+                "Nome: " + this.nome + "\n" +
+                        "CPF: " + this.cpf + "\n" +
+                        "Data de Nascimento: " + this.dataNascimento + "\n" +
+                        "Endereço: " + this.endereco + "\n" +
+                        "Telefone: " + this.telefone
         );
     }
-
-    
 }
+

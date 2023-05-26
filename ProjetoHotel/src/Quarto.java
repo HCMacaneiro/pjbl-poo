@@ -17,3 +17,4 @@ public class Quarto {
         this.hospedes.add(cliente);
     }
 }
+

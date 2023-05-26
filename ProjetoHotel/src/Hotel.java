@@ -5,7 +5,11 @@ public class Hotel {
     private ArrayList<Quarto> quartos;
     private ArrayList<Funcionario> funcionarios;
 
-    public Hotel(String nome) {
+    public Hotel(String nome) throws HotelException {
+        if (nome == null || nome.equals("")) {
+            throw new HotelException("Nome do hotel não pode ser vazio");
+        }
+
         this.nome = nome;
         this.quartos = new ArrayList<>();
         this.funcionarios = new ArrayList<>();
@@ -14,6 +18,7 @@ public class Hotel {
     public void adicionarQuarto(Quarto quarto) {
         this.quartos.add(quarto);
     }
+
     public void adicionarFuncionario(Funcionario funcionario) {
         this.funcionarios.add(funcionario);
     }
@@ -22,3 +27,4 @@ public class Hotel {
         System.out.println("Hotel: " + this.nome + "\n");
     }
 }
+
