@@ -34,17 +34,32 @@ public class Main {
             // Mostrando informações de cada funcionário
             funcionario1.mostrar();
             funcionario1.status();
+            System.out.println("Salário do Funcionario 1: " + funcionario1.getSalario());
+
             funcionario2.mostrar();
             funcionario2.status();
+            System.out.println("Salário do Funcionario 2: " + funcionario2.getSalario());
+
+            // Alterando o nome do funcionario1
+            funcionario1.setNome("João Silva");
+            System.out.println("Novo nome do Funcionario 1: " + funcionario1.getNome());
 
             // Mostrando informações de cada cliente
             cliente1.mostrar();
             cliente1.status();
+            System.out.println("Email do Cliente 1: " + cliente1.getEmail());
+
             cliente2.mostrar();
             cliente2.status();
+            System.out.println("Email do Cliente 2: " + cliente2.getEmail());
+
+            // Mostrando o número dos quartos
+            System.out.println("Número do Quarto 101: " + quarto101.getNumero());
+            System.out.println("Número do Quarto 102: " + quarto102.getNumero());
 
         } catch (HotelException e) {
             e.printStackTrace();
         }
     }
 }
+
