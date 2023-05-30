@@ -1,20 +1,29 @@
-import java.util.ArrayList;
+package myVersion;
 
 public class Quarto {
     private int numero;
-    private ArrayList<Cliente> hospedes;
+    private TipoQuarto tipo;
+    private StatusQuarto status;
 
-    public Quarto(int numero) {
+    public Quarto(int numero, TipoQuarto tipo) {
         this.numero = numero;
-        this.hospedes = new ArrayList<>();
+        this.tipo = tipo;
+        this.status = StatusQuarto.DISPONIVEL;
     }
 
     public int getNumero() {
         return numero;
     }
 
-    public void adicionarHospede(Cliente cliente) {
-        this.hospedes.add(cliente);
+    public TipoQuarto getTipo() {
+        return tipo;
+    }
+
+    public StatusQuarto getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusQuarto status) {
+        this.status = status;
     }
 }
-
