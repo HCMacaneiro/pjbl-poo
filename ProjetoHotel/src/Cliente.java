@@ -12,6 +12,14 @@ public class Cliente extends Pessoa {
         return email;
     }
 
+    public void mostrar(){
+        System.out.println("[ Cliente ]");
+        super.mostrar();
+
+        System.out.println("Email: " + this.email + "\n" +
+                            "Em Quarto: " + this.emQuarto + "\n");
+    }
+
     @Override
     public void status() {
         if(emQuarto) {

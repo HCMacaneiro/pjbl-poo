@@ -1,30 +1,31 @@
-package myVersion;
-
-public class Funcionario {
-    private String nome;
-    private String cpf;
+public class Funcionario extends Pessoa {
     private double salario;
+    private boolean seraDemitido;
 
-    public Funcionario(String nome, String cpf, double salario) {
-        this.nome = nome;
-        this.cpf = cpf;
+    public Funcionario(String nome, String cpf, double salario, String dataNascimento, String endereco, String telefone, boolean seraDemitido) {
+        super(nome, cpf, dataNascimento, endereco, telefone);
         this.salario = salario;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getCpf() {
-        return cpf;
+        this.seraDemitido = seraDemitido;
     }
 
     public double getSalario() {
         return salario;
     }
 
-    public void setSalario(double salario) {
-        this.salario = salario;
+    public void mostrar(){
+        super.mostrar();
+
+        System.out.println("Salário: " + this.salario + "\n" +
+                            "Será Demitido: " + this.seraDemitido + "\n");
+    }
+
+    @Override
+    public void status() {
+        if(seraDemitido) {
+            System.out.println("O funcionário será demitido.");
+        } else {
+            System.out.println("O funcionário não será demitido.");
+        }
     }
 }
 

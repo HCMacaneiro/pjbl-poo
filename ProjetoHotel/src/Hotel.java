@@ -1,68 +1,43 @@
-package myVersion;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class Hotel {
-    private List<Quarto> quartos;
+    private String nome;
+    private ArrayList<Quarto> quartos;
+    private ArrayList<Funcionario> funcionarios;
 
-    public Hotel() {
-        this.quartos = new ArrayList<>();
-        inicializarQuartos();
-    }
-
-    public List<TipoQuarto> getTiposQuarto() {
-        List<TipoQuarto> tiposQuarto = new ArrayList<>();
-        for (Quarto quarto : quartos) {
-            TipoQuarto tipoQuarto = quarto.getTipo();
-            if (!tiposQuarto.contains(tipoQuarto)) {
-                tiposQuarto.add(tipoQuarto);
-            }
+    public Hotel(String nome) throws HotelException {
+        if (nome == null || nome.equals("")) {
+            throw new HotelException("Nome do hotel não pode ser vazio");
         }
-        return tiposQuarto;
+
+        this.nome = nome;
+        this.quartos = new ArrayList<>();
+        this.funcionarios = new ArrayList<>();
     }
 
     public void adicionarQuarto(Quarto quarto) {
-        quartos.add(quarto);
+        this.quartos.add(quarto);
     }
 
-    public List<Quarto> getQuartosDisponiveis() {
-        List<Quarto> quartosDisponiveis = new ArrayList<>();
-        for (Quarto quarto : quartos) {
-            if (quarto.getStatus() == StatusQuarto.DISPONIVEL) {
-                quartosDisponiveis.add(quarto);
-            }
-        }
-        return quartosDisponiveis;
+    public void adicionarFuncionario(Funcionario funcionario) {
+        this.funcionarios.add(funcionario);
     }
 
-    public Quarto buscarQuartoPorNumero(int numero) {
-        for (Quarto quarto : quartos) {
-            if (quarto.getNumero() == numero) {
-                return quarto;
-            }
-        }
-        return null;
+    public void mostrar() {
+        System.out.println("Hotel: " + this.nome + "\n");
     }
 
-    private void inicializarQuartos() {
-        TipoQuarto suitePresidencial = new TipoQuarto("Suíte Presidencial", 500.00, 4);
-        TipoQuarto suiteExecutiva = new TipoQuarto("Suíte Executiva", 300.00, 2);
-        TipoQuarto suiteEconomica = new TipoQuarto("Suíte Econômica", 200.00, 2);
+    public void mostrarTudo(){
+        System.out.println("Hotel: " + this.nome + "\n");
 
-        for (int i = 1; i <= 5; i++) {
-            Quarto quarto = new Quarto(i, suitePresidencial);
-            adicionarQuarto(quarto);
+        for (Funcionario f : funcionarios){
+            f.mostrar();
         }
 
-        for (int i = 6; i <= 20; i++) {
-            Quarto quarto = new Quarto(i, suiteExecutiva);
-            adicionarQuarto(quarto);
+        for (Quarto q : quartos){
+            q.mostrar();
         }
 
-        for (int i = 21; i <= 50; i++) {
-            Quarto quarto = new Quarto(i, suiteEconomica);
-            adicionarQuarto(quarto);
-        }
     }
 }
+
