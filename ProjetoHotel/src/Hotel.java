@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Hotel {
+public class Hotel implements Serializable {
     private String nome;
     private ArrayList<Quarto> quartos;
     private ArrayList<Funcionario> funcionarios;

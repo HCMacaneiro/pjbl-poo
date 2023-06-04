@@ -2,56 +2,48 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.*;
 
+import static java.lang.System.exit;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args){
         // ! ALTERAR O CAMINHO DO ARQUIVO !
-        String fileName = "C:\\Users\\diego\\Downloads\\pjbl-poo-main\\pjbl-poo-main\\ProjetoHotel\\src/hotel.txt";
-        Hotel hotel = null;
-
+        String filePath = "C:\\Users\\diego\\Documents\\GitHub\\pjbl-poo\\ProjetoHotel\\src/hotel.txt";
         Scanner terminal = new Scanner(System.in);
+        Hotel hotel = null;
+        Funcionario funcionario;
+        Cliente cliente;
+        Quarto quarto;
+        ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
+        ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+        ArrayList<Quarto> quartos = new ArrayList<Quarto>();
 
-        // Checa se o arquivo Existe
-        boolean fileExists = new File(fileName).exists();
-
-        // Lê o arquivo
-        if (fileExists) {
-            try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
-                hotel = (Hotel) inputStream.readObject();
-            } catch (IOException | ClassNotFoundException e) {
-                System.out.println("\n\nERRO: erro na leitura do arquivo: " + e.getMessage());
-            }
-        }
-
-
-        System.out.println("\n[1] - Ler arquivo 'hotel'\n[2] - Criar novo perfil\n=");
+        System.out.println("\n[1] - Ler arquivo 'hotel'\n[2] - Criar novo perfil");
         int escolha = terminal.nextInt();
 
-        // verifica se 'hotel' existe no .txt
-        if (!fileExists || hotel == null) {
-            System.out.println("\n\nERRO: o objeto 'hotel' não existe, vamos criar um novo perfil...\n");
-            escolha = 2;
-        }
-
         switch (escolha) {
+            // ler
             case 1:
-                try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
+                try {
+                    FileInputStream fileIn = new FileInputStream(filePath);
+                    ObjectInputStream objIn = new ObjectInputStream(fileIn);
                     while (true) {
                         try {
-                            // captura todos os objetos do arquivo
-                            Object object = inputStream.readObject();
+                            Object obj = objIn.readObject(); // Read the object once
 
-                            // começa a separação dos objetos
-                            if (object instanceof Hotel) {
-                                hotel = (Hotel) object;
-
-                            } else if (object instanceof Funcionario) {
-                                Funcionario funcionario = (Funcionario) object;
-
-                            } else if (object instanceof Cliente) {
-                                Cliente cliente = (Cliente) object;
-
+                            if (obj instanceof Hotel) {
+                                hotel = (Hotel) obj;
+                            } else if (obj instanceof Funcionario) {
+                                funcionario = (Funcionario) obj;
+                                funcionarios.add(funcionario);
+                            } else if (obj instanceof Cliente) {
+                                cliente = (Cliente) obj;
+                                clientes.add(cliente);
+                            } else if (obj instanceof Quarto) {
+                                quarto = (Quarto) obj;
+                                quartos.add(quarto);
+                            } else {
+                                break;
                             }
-                            // aciona ao chegar no final do arquivo
                         } catch (EOFException e) {
                             System.out.println("\nAVISO: leitura dos objetos bem sucedida!\n");
                             break;
@@ -62,8 +54,10 @@ public class Main {
                 }
                 break;
 
+                // criar
             case 2:
                 try {
+                    terminal.nextLine();
                     System.out.println("\nQual o nome do Hotel:");
                     String nome = terminal.nextLine();
 
@@ -78,21 +72,21 @@ public class Main {
                 // # gerador de objetos #
                 System.out.println("Quantos funcionários deseja adicionar:");
                 quantidade = terminal.nextInt();
-                ArrayList<Funcionario> funcionarios = funcoes.gerarFuncionario(quantidade);
+                funcionarios = funcoes.gerarFuncionario(quantidade);
                 for (Funcionario f : funcionarios) {
                     hotel.adicionarFuncionario(f);
                 }
 
                 System.out.println("Quantos quartos deseja adicionar:");
                 quantidade = terminal.nextInt();
-                ArrayList<Quarto> quartos = funcoes.gerarQuarto(quantidade);
+                quartos = funcoes.gerarQuarto(quantidade);
                 for (Quarto q : quartos) {
                     hotel.adicionarQuarto(q);
                 }
 
                 System.out.println("Quantos clientes deseja adicionar:");
                 quantidade = terminal.nextInt();
-                ArrayList<Cliente> clientes = funcoes.gerarCliente(quantidade);
+                clientes = funcoes.gerarCliente(quantidade);
                 for (Cliente c : clientes) {
                     System.out.println("Deseja adicionar o cliente'"+ c.getNome()+"' e CPF'"+ c.getCpf() +"' em qual dos quartos:");
 
@@ -102,7 +96,7 @@ public class Main {
                     }
 
                     escolha = terminal.nextInt();
-                    Quarto quarto = quartos.get(escolha);
+                    quarto = quartos.get(escolha);
                     quarto.adicionarHospede(c);
                 }
 
@@ -112,15 +106,29 @@ public class Main {
         // mostra o conteúdo de 'hotel'
         hotel.mostrarTudo();
 
+
         // persistir dados
-        System.out.println("Deseja salvar os dados:\n[1] - Salvar\n[2] - Não Salvar");
+        System.out.println("\n\nDeseja salvar os dados:\n[1] - Salvar\n[2] - Não Salvar");
         escolha = terminal.nextInt();
 
         switch (escolha) {
             case 1:
                 // Salva o objeto hotel no arquivo .txt
-                try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(fileName))) {
-                    outputStream.writeObject(hotel);
+                try {
+                    FileOutputStream fileOut = new FileOutputStream(filePath);
+                    ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
+
+                    objOut.writeObject(hotel);
+                    for (Funcionario f : funcionarios){
+                        objOut.writeObject(f);
+                    }
+                    for (Cliente c : clientes){
+                        objOut.writeObject(c);
+                    }
+                    for (Quarto q : quartos){
+                        objOut.writeObject(q);
+                    }
+
                     System.out.println("O Hotel foi salvo.");
                 } catch (IOException e) {
                     System.out.println("Um erro ocorreu ao salvar o Hotel: " + e.getMessage());

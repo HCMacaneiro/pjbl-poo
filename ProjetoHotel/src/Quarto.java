@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Quarto {
+public class Quarto implements Serializable {
     private int numero;
     private ArrayList<Cliente> hospedes;
 
