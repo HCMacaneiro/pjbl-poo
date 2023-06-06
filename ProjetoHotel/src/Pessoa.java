@@ -1,4 +1,6 @@
-public abstract class Pessoa {
+import java.io.Serializable;
+
+public abstract class Pessoa implements Serializable {
     private String nome;
     private String cpf;
     private String dataNascimento;
@@ -18,6 +20,8 @@ public abstract class Pessoa {
     public String getNome() {
         return nome;
     }
+
+    public String getCpf(){ return cpf; }
 
     public void setNome(String nome) {
         this.nome = nome;

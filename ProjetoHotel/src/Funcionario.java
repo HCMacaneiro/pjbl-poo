@@ -1,4 +1,6 @@
-public class Funcionario extends Pessoa {
+import java.io.Serializable;
+
+public class Funcionario extends Pessoa implements Serializable {
     private double salario;
     private boolean seraDemitido;
 
@@ -10,6 +12,13 @@ public class Funcionario extends Pessoa {
 
     public double getSalario() {
         return salario;
+    }
+
+    public void mostrar(){
+        super.mostrar();
+
+        System.out.println("Salário: " + this.salario + "\n" +
+                            "Será Demitido: " + this.seraDemitido + "\n");
     }
 
     @Override

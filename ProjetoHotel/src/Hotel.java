@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Hotel {
+public class Hotel implements Serializable {
     private String nome;
     private ArrayList<Quarto> quartos;
     private ArrayList<Funcionario> funcionarios;
@@ -25,6 +26,19 @@ public class Hotel {
 
     public void mostrar() {
         System.out.println("Hotel: " + this.nome + "\n");
+    }
+
+    public void mostrarTudo(){
+        System.out.println("Hotel: " + this.nome + "\n");
+
+        for (Funcionario f : funcionarios){
+            f.mostrar();
+        }
+
+        for (Quarto q : quartos){
+            q.mostrar();
+        }
+
     }
 }
 

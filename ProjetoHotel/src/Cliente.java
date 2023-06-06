@@ -1,4 +1,6 @@
-public class Cliente extends Pessoa {
+import java.io.Serializable;
+
+public class Cliente extends Pessoa implements Serializable {
     private String email;
     private boolean emQuarto;
 
@@ -10,6 +12,14 @@ public class Cliente extends Pessoa {
 
     public String getEmail() {
         return email;
+    }
+
+    public void mostrar(){
+        System.out.println("[ Cliente ]");
+        super.mostrar();
+
+        System.out.println("Email: " + this.email + "\n" +
+                            "Em Quarto: " + this.emQuarto + "\n");
     }
 
     @Override
