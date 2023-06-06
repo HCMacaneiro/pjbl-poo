@@ -8,8 +8,8 @@ public class HotelForm extends JFrame {
     private Hotel hotel;
     private JTextArea textArea;
 
-    public HotelForm() {
-        hotel = new Hotel();
+    public HotelForm() throws HotelException{
+        hotel = new Hotel("Adicionar Campo para Perguntar o nome");
         createView();
 
         setTitle("Hotel Form");

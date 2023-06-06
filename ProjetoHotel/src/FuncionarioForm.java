@@ -9,6 +9,9 @@ public class FuncionarioForm extends JFrame {
     private JTextField fieldName;
     private JTextField fieldCPF;
     private JTextField fieldSalario;
+    private JTextField fieldDataNascimento;
+    private JTextField fieldEndereco;
+    private JTextField fieldTelefone;
 
     public FuncionarioForm() {
         createView();
@@ -41,6 +44,21 @@ public class FuncionarioForm extends JFrame {
         panel.add(labelSalario);
         panel.add(fieldSalario);
 
+        JLabel labelDataNascimento = new JLabel("Data de Nascimento:");
+        fieldDataNascimento = new JTextField();
+        panel.add(labelDataNascimento);
+        panel.add(fieldDataNascimento);
+
+        JLabel labelEndereco = new JLabel("Endereço:");
+        fieldEndereco = new JTextField();
+        panel.add(labelEndereco);
+        panel.add(fieldEndereco);
+
+        JLabel labelTelefone = new JLabel("Telefone:");
+        fieldTelefone = new JTextField();
+        panel.add(labelTelefone);
+        panel.add(fieldTelefone);
+
         JButton buttonSubmit = new JButton("Submit");
         buttonSubmit.addActionListener(new ActionListener() {
             @Override
@@ -55,8 +73,11 @@ public class FuncionarioForm extends JFrame {
         String nome = fieldName.getText();
         String cpf = fieldCPF.getText();
         double salario = Double.parseDouble(fieldSalario.getText());
+        String dataNascimento = fieldDataNascimento.getText();
+        String endereco = fieldEndereco.getText();
+        String telefone = fieldTelefone.getText();
 
-        funcionario = new Funcionario(nome, cpf, salario);
+        funcionario = new Funcionario(nome, cpf, salario, dataNascimento, endereco, telefone, false);
 
         JOptionPane.showMessageDialog(this,
                 "Funcionario created: \nNome: " + funcionario.getNome() +
