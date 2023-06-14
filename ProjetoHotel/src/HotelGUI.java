@@ -101,12 +101,8 @@ public class HotelGUI {
             String nome = nomeField.getText();
             String cpf = cpfField.getText();
             String telefone = telefoneField.getText();
-            Hospede hospede = null;
-            try{
-                hospede = new Hospede(nome, cpf, telefone);
-            } catch (HospedeException he){
-                System.out.println(he.getMessage());
-            }
+
+            Hospede hospede = new Hospede(nome, cpf, telefone);
             hotel.adicionarHospedeEmQuartoDisponivel(hospede);
             textArea.append("Hóspede adicionado: " + nome + "\n");
 
