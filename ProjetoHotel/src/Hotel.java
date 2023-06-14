@@ -3,42 +3,40 @@ import java.util.ArrayList;
 
 public class Hotel implements Serializable {
     private String nome;
+    private ArrayList<Hospede> hospedes;
     private ArrayList<Quarto> quartos;
-    private ArrayList<Funcionario> funcionarios;
 
-    public Hotel(String nome) throws HotelException {
-        if (nome == null || nome.equals("")) {
-            throw new HotelException("Nome do hotel não pode ser vazio");
-        }
-
+    public Hotel(String nome) {
         this.nome = nome;
+        this.hospedes = new ArrayList<>();
         this.quartos = new ArrayList<>();
-        this.funcionarios = new ArrayList<>();
+
+        // Inicializa 10 quartos
+        for (int i = 1; i <= 10; i++) {
+            this.quartos.add(new Quarto(i, "Simples"));
+        }
     }
 
-    public void adicionarQuarto(Quarto quarto) {
-        this.quartos.add(quarto);
-    }
-
-    public void adicionarFuncionario(Funcionario funcionario) {
-        this.funcionarios.add(funcionario);
-    }
-
-    public void mostrar() {
-        System.out.println("Hotel: " + this.nome + "\n");
-    }
-
-    public void mostrarTudo(){
-        System.out.println("Hotel: " + this.nome + "\n");
-
-        for (Funcionario f : funcionarios){
-            f.mostrar();
+    public void adicionarHospedeEmQuartoDisponivel(Hospede hospede) {
+        Quarto quartoDisponivel = null;
+        for (Quarto quarto : quartos) {
+            if (!quarto.isOcupado()) {
+                quartoDisponivel = quarto;
+                break;
+            }
         }
 
-        for (Quarto q : quartos){
-            q.mostrar();
+        if (quartoDisponivel != null) {
+            quartoDisponivel.setHospede(hospede);
+            hospedes.add(hospede);
         }
+    }
 
+    public ArrayList<Hospede> getHospedes() {
+        return hospedes;
+    }
+
+    public ArrayList<Quarto> getQuartos() {
+        return quartos;
     }
 }
-

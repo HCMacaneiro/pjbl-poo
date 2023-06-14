@@ -17,8 +17,6 @@ public class mainFunctions {
             System.out.println("\nQual seu salario:");
             double salario = terminal.nextDouble();
 
-            terminal.nextLine();
-
             System.out.println("\nQual sua data de nascimento:");
             String dataNascimento = terminal.nextLine();
 
@@ -66,9 +64,6 @@ public class mainFunctions {
 
             System.out.println("\nQual seu email:");
             String email = terminal.nextLine();
-
-            System.out.println("\nQual seu salario:");
-            double salario = terminal.nextDouble();
 
             terminal.nextLine();
 

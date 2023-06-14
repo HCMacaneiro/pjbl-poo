@@ -1,29 +1,48 @@
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class Quarto implements Serializable {
     private int numero;
-    private ArrayList<Cliente> hospedes;
+    private String tipo;
+    private boolean ocupado;
+    private Hospede hospede;
 
-    public Quarto(int numero) {
+    public Quarto(int numero, String tipo) {
         this.numero = numero;
-        this.hospedes = new ArrayList<>();
+        this.tipo = tipo;
+        this.ocupado = false;
+    }
+
+    public void setHospede(Hospede hospede) {
+        this.hospede = hospede;
+        this.ocupado = true;
+    }
+
+    public void removeHospede() {
+        this.hospede = null;
+        this.ocupado = false;
+    }
+
+    public Hospede getHospede() {
+        return this.hospede;
     }
 
     public int getNumero() {
         return numero;
     }
 
-    public void mostrar(){
-        System.out.println("[ Quarto ]");
-        System.out.println("Número: " + this.numero + "\n");
-        for (Cliente c : hospedes){
-            c.mostrar();
-        }
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
 
-    public void adicionarHospede(Cliente cliente) {
-        this.hospedes.add(cliente);
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public boolean isOcupado() {
+        return ocupado;
     }
 }
-
